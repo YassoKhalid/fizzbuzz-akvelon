@@ -11,6 +11,14 @@ dotnet run
 Enter your text, then finish input on a new line with **Ctrl+D** on Linux/macOS
 or **Ctrl+Z, Enter** on Windows.
 
+Input must not be null and must contain **7 to 100 characters**, including spaces
+and line breaks. Invalid input produces an error message and exit code 1.
+To supply text without a trailing newline on Linux/macOS:
+
+```bash
+printf '%s' 'one two three four five' | dotnet run
+```
+
 Words are numbered starting at 1, continuing across line breaks:
 
 - Every third word becomes `Fizz`.
@@ -32,10 +40,10 @@ returns a `FizzBuzzResult` containing:
   Existing `Fizz`, `Buzz`, or `FizzBuzz` words do not increase the count unless
   their position triggers a replacement.
 
-`Program.cs` reads the console input, calls the detector, and prints the result.
-The console collects lines until end-of-input, adding a newline after each line.
-
-The input has to be not Null. It is guranteed in the document, that's why I didn't worry about handling it.
+`Program.cs` reads all text until end-of-input, calls the detector, and prints the
+result. Punctuation, spaces, and line endings are preserved exactly as supplied.
+The assignment's sample is 100 characters with LF line endings and no trailing
+newline; additional line-ending characters count toward the limit.
 
 Run the unit tests:
 

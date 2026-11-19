@@ -1,3 +1,4 @@
+using System;
 using FizzBuzz;
 using Xunit;
 
@@ -59,5 +60,35 @@ public class FizzBuzzDetectorTests
 
         Assert.Equal("Fizz,\tBuzz  Fizz\r\nfour;Buzz!", result.Output);
         Assert.Equal(2, result.Count);
+    }
+
+    [Fact]
+    public void RejectsNullInput()
+    {
+        Assert.Throws<ArgumentNullException>(() => _detector.getOverlappings(null!));
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(6)]
+    [InlineData(101)]
+    public void RejectsInputOutsideLengthLimits(int length)
+    {
+        string input = new string('a', length);
+
+        Assert.Throws<ArgumentException>(() => _detector.getOverlappings(input));
+    }
+
+    [Theory]
+    [InlineData(7)]
+    [InlineData(100)]
+    public void AcceptsInputAtLengthLimits(int length)
+    {
+        string input = new string('a', length);
+
+        var result = _detector.getOverlappings(input);
+
+        Assert.Equal(input, result.Output);
+        Assert.Equal(0, result.Count);
     }
 }

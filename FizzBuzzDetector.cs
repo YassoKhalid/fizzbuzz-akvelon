@@ -13,6 +13,15 @@ public class FizzBuzzDetector
     }
     public FizzBuzzResult getOverlappings(string input)
     {
+        if (input is null)
+        {
+            throw new ArgumentNullException(nameof(input), "Input cannot be null.");
+        }
+        if (input.Length < 7 || input.Length > 100)
+        {
+            throw new ArgumentException("Input must contain between 7 and 100 characters.", nameof(input));
+        }
+
         StringBuilder result = new StringBuilder();
         int count = 0, i = 0, currentPos = 0;
         while (i < input.Length)

@@ -1,11 +1,15 @@
 ﻿using FizzBuzz;
 var detector = new FizzBuzzDetector();
-string input = "";
-string? line;
-while ((line = Console.ReadLine()) != null)
+string input = Console.In.ReadToEnd();
+
+try
 {
-    input += line + "\n";
+    var result = detector.getOverlappings(input);
+    Console.WriteLine($"Output string:\n{result.Output}");
+    Console.WriteLine($"Count: {result.Count}");
 }
-var result = detector.getOverlappings(input);
-Console.WriteLine($"Output string:\n{result.Output}");
-Console.WriteLine($"Count: {result.Count}");
+catch (ArgumentException exception)
+{
+    Console.Error.WriteLine(exception.Message);
+    Environment.ExitCode = 1;
+}
