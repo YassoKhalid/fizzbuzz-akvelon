@@ -36,3 +36,9 @@ returns a `FizzBuzzResult` containing:
 The console collects lines until end-of-input, adding a newline after each line.
 
 The input has to be not Null. It is guranteed in the document, that's why I didn't worry about handling it.
+
+Run the unit tests:
+
+```bash
+dotnet test tests/FizzBuzz.Tests.csproj
+```
